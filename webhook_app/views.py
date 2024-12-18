@@ -21,6 +21,9 @@ class destionationListCreateView(generics.ListCreateAPIView):
     serializer_class=DestinationSerializer
     def get_queryset(self):
         return Destinations.objects.filter(account__account_id=self.kwargs['account_id'])
+    def perform_create(self, serializer):
+        account = Accounts.objects.get(account_id=self.kwargs['account_id'])
+        serializer.save(account=account)
     
 class destinationRetrieveUpdateView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Destinations.objects.all()

@@ -12,3 +12,6 @@ class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destinations
         fields = '__all__'
+        extra_kwargs = {
+            'account': {'required': False},  # Make 'account' not required
+        }
